@@ -351,7 +351,7 @@ h1 { text-align: center; color: #1e293b; }
 .booking-container { display: flex; max-width: 900px; margin: 0 auto; gap: 10px; }
 
 /* 1. Time Labels (left column) */
-.time-labels { display: grid; grid-template-rows: 50px repeat(12, 1fr); /* Header + 12 hours */ gap: 8px; font-weight: bold; color: #64748b; text-align: right; padding-right: 10px; }
+.time-labels { display: grid; grid-template-rows: 50px repeat(13, 1fr); /* Header + 13 hours */ gap: 8px; font-weight: bold; color: #64748b; text-align: right; padding-right: 10px; }
 .time-label { display: flex; align-items: center; justify-content: flex-end; height: 60px; /* Matching cell height */ }
 
 /* 2. Court Grid (The 3 columns) */
@@ -360,8 +360,8 @@ h1 { text-align: center; color: #1e293b; }
     display: grid;
     /* 3 equal columns for courts */
     grid-template-columns: repeat(3, 1fr); 
-    /* Header row (50px) + 12 hour rows (automatically sized) */
-    grid-template-rows: 50px repeat(12, 60px); 
+    /* Header row (50px) + 13 hour rows (60px each) */
+    grid-template-rows: 50px repeat(13, 60px); 
     gap: 8px;
 }
 
