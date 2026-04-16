@@ -13,7 +13,7 @@ async function initBookingGrid() {
 
   // 1. Fetch data from your backend
   try {
-    const response = await fetch('https://your-backend.vercel.app/api/courts');
+    const response = await fetch('https://badminton-reserve-cyan.vercel.app/api/courts');
     const courts: CourtData[] = await response.json();
 
     // 2. Render Time Labels (10:00, 11:00...)
