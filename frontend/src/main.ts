@@ -26,7 +26,8 @@ async function initBookingGrid(day: string = 'Monday') {
       labelsContainer.innerHTML += `<div class="time-label">${hour}:00</div>`;
     }
 
-    // 3. Render Court Headers (Pista 1, Pista 2...)
+    // 3. Clear and Render Court Headers (Pista 1, Pista 2...)
+    courtsContainer.innerHTML = '';
     courts.slice(0, 3).forEach(court => { // Limit to 3 courts as requested
       courtsContainer.innerHTML += `<div class="cell header-cell">${court.name}</div>`;
     });
