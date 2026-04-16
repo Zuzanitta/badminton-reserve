@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // 2. Middleware
-app.use(cors());          // Allows your Frontend to talk to this Backend
+app.use(cors({ origin: 'https://zuzanitta.github.io' }));          // Allows your Frontend to talk to this Backend
 app.use(express.json());  // Allows Backend to read JSON sent by Frontend
 
 // 3. Define Types (The "Contract" for your data)
