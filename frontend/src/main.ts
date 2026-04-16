@@ -1,5 +1,5 @@
 import './style.css'; // Import our CSS
-import type { CourtData, TimeSlot } from './types'; // (You need to create this file)
+import type { CourtData } from './types'; // (You need to create this file)
 
 // Define the operating hours (10:00 to 22:00)
 const START_HOUR = 10;
