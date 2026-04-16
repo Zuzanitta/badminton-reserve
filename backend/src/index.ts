@@ -85,7 +85,7 @@ const dayMapping: { [key: string]: string } = {
   'Sunday': '862076829',
 };
 
-const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/1ZXbucUe8oVE8lq4357D9EJYnqcq7z0G1I54dI-L9u3k/pub";
+const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/2PACX-1vQRV8M-vYaXiga7SHxmV1QLQHx03lRh1uoIwkIVsPMNPR-sa7appOB70e-1FtP4IBU26oEtveKqG1_3/pub";
 
 app.get('/api/courts', async (req, res) => {
   try {
@@ -94,14 +94,20 @@ app.get('/api/courts', async (req, res) => {
     
     const SHEET_CSV_URL = `${SHEET_BASE_URL}?gid=${gid}&single=true&output=csv`;
     
+    console.log('Fetching from:', SHEET_CSV_URL); // Debug log
+    
     // 1. Explicitly tell Axios to expect a string
     const response = await axios.get<string>(SHEET_CSV_URL);
+    
+    console.log('Response status:', response.status); // Debug log
     
     // 2. Tell the parser that response.data is definitely a string
     const records = parse(response.data as string, {
       columns: true,
       skip_empty_lines: true,
     });
+
+    console.log('Parsed records:', records.length); // Debug log
 
     // 3. Transform CSV rows into your TypeScript Court[] structure
     const formattedCourts = [
@@ -119,7 +125,8 @@ app.get('/api/courts', async (req, res) => {
 
     res.json(formattedCourts);
   } catch (error) {
-    res.status(500).json({ error: "Error leyendo Google Sheets" });
+    console.error('Backend error:', error); // Debug log
+    res.status(500).json({ error: "Error leyendo Google Sheets", details: error.message });
   }
 });
 
