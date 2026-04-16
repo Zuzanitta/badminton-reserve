@@ -294,3 +294,64 @@ code {
     border-right-color: var(--border);
   }
 }
+
+/* frontend/src/style.css */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; padding: 20px; }
+h1 { text-align: center; color: #1e293b; }
+
+/* Main Container: Time Labels + Court Grid side-by-side */
+.booking-container { display: flex; max-width: 900px; margin: 0 auto; gap: 10px; }
+
+/* 1. Time Labels (left column) */
+.time-labels { display: grid; grid-template-rows: 50px repeat(12, 1fr); /* Header + 12 hours */ gap: 8px; font-weight: bold; color: #64748b; text-align: right; padding-right: 10px; }
+.time-label { display: flex; align-items: center; justify-content: flex-end; height: 60px; /* Matching cell height */ }
+
+/* 2. Court Grid (The 3 columns) */
+.court-grid {
+    flex: 1;
+    display: grid;
+    /* 3 equal columns for courts */
+    grid-template-columns: repeat(3, 1fr); 
+    /* Header row (50px) + 12 hour rows (automatically sized) */
+    grid-template-rows: 50px repeat(12, 60px); 
+    gap: 8px;
+}
+
+/* 3. Global Cell Styling */
+.cell { display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 14px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
+
+/* 4. Headers (Pista 1, Pista 2...) */
+.header-cell { background-color: #0f172a; color: white; cursor: default; }
+
+/* 5. Status-based Coloring (The logic you asked for) */
+.available {
+    background-color: #ecfdf5; /* Light Green */
+    color: #047857;
+    border-color: #a7f3d0;
+    cursor: pointer;
+}
+.available:hover { background-color: #d1fae5; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+.booked {
+    background-color: #fee2e2; /* Light Red */
+    color: #b91c1c;
+    border-color: #fecaca;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.locked {
+    background-color: #fffbeb; /* Light Orange/Yellow */
+    color: #b45309;
+    border-color: #fde68a;
+    cursor: wait;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+/* Mobile optimization: stack columns if screen is too small */
+@media (max-width: 600px) {
+    .booking-container { flex-direction: column; }
+    .court-grid { grid-template-columns: 1fr; /* 1 column on mobile */ grid-template-rows: auto; }
+}
