@@ -85,7 +85,7 @@ const dayMapping: { [key: string]: string } = {
   'Sunday': '862076829',
 };
 
-const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/2PACX-1vQRV8M-vYaXiga7SHxmV1QLQHx03lRh1uoIwkIVsPMNPR-sa7appOB70e-1FtP4IBU26oEtveKqG1_3/pub";
+const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/1ZXbucUe8oVE8lq4357D9EJYnqcq7z0G1I54dI-L9u3k/pub";
 
 app.get('/api/courts', async (req, res) => {
   try {
