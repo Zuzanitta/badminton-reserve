@@ -107,12 +107,14 @@ app.get('/api/courts', async (req, res) => {
   }
 });
 
-// Helper to convert Spanish words in Excel to your code's Status
+// Helper to convert cell content to Status
+// If the cell is empty → available, otherwise → booked
 function mapStatus(text: string): string {
-  const t = text.toLowerCase().trim();
-  if (t === 'ocupado' || t === 'booked') return 'booked';
-  if (t === 'bloqueado' || t === 'locked') return 'locked';
-  return 'available'; // Default
+  const t = text.trim();
+  if (t === '' || t === null || t === undefined) {
+    return 'available';
+  }
+  return 'booked'; // Any non-empty content means booked
 }
 
 // C. Book/Lock a court (The logic you asked for)
