@@ -74,10 +74,26 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // B. Get all courts (Frontend will call this to draw the grid)
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRV8M-vYaXiga7SHxmV1QLQHx03lRh1uoIwkIVsPMNPR-sa7appOB70e-1FtP4IBU26oEtveKqG1_3/pub?gid=0&single=true&output=csv";
+// Mapping of day names to Google Sheet gid (sheet ID)
+const dayMapping: { [key: string]: string } = {
+  'Monday': '0',
+  'Tuesday': '1',
+  'Wednesday': '2',
+  'Thursday': '3',
+  'Friday': '4',
+  'Saturday': '5',
+  'Sunday': '6',
+};
+
+const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRV8M-vYaXiga7SHxmV1QLQHx03lRh1uoIwkIVsPMNPR-sa7appOB70e-1FtP4IBU26oEtveKqG1_3/pub";
 
 app.get('/api/courts', async (req, res) => {
   try {
+    const day = (req.query.day as string) || 'Monday';
+    const gid = dayMapping[day] || '0'; // Default to Monday (gid=0) if day not found
+    
+    const SHEET_CSV_URL = `${SHEET_BASE_URL}?gid=${gid}&single=true&output=csv`;
+    
     // 1. Explicitly tell Axios to expect a string
     const response = await axios.get<string>(SHEET_CSV_URL);
     

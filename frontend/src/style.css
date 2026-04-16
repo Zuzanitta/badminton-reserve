@@ -299,6 +299,54 @@ code {
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; padding: 20px; }
 h1 { text-align: center; color: #1e293b; }
 
+/* Day Selector Container */
+.day-selector-container {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.day-selector-container p {
+  margin: 0 0 15px 0;
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.day-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.day-btn {
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #475569;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.day-btn:hover {
+  border-color: #aa3bff;
+  background-color: #f1f5f9;
+}
+
+.day-btn.active {
+  background-color: #aa3bff;
+  color: white;
+  border-color: #aa3bff;
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.3);
+}
+
 /* Main Container: Time Labels + Court Grid side-by-side */
 .booking-container { display: flex; max-width: 900px; margin: 0 auto; gap: 10px; }
 

@@ -5,15 +5,18 @@ import type { CourtData } from './types'; // (You need to create this file)
 const START_HOUR = 10;
 const END_HOUR = 22;
 
-async function initBookingGrid() {
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+let selectedDay = 'Monday'; // Default day
+
+async function initBookingGrid(day: string = 'Monday') {
   const courtsContainer = document.querySelector<HTMLDivElement>('#court-grid');
   const labelsContainer = document.querySelector<HTMLDivElement>('#time-labels');
 
   if (!courtsContainer || !labelsContainer) return;
 
-  // 1. Fetch data from your backend
+  // 1. Fetch data from your backend with the selected day
   try {
-    const response = await fetch('https://badminton-reserve-cyan.vercel.app/api/courts');
+    const response = await fetch(`https://badminton-reserve-cyan.vercel.app/api/courts?day=${day}`);
     const courts: CourtData[] = await response.json();
 
     // 2. Render Time Labels (10:00, 11:00...)
@@ -75,5 +78,27 @@ function getStatusText(status: string): string {
   }
 };
 
+// Initialize day selector
+function initDaySelector() {
+  const daySelector = document.querySelector<HTMLDivElement>('#day-selector');
+  if (!daySelector) return;
+
+  DAYS.forEach(day => {
+    const button = document.createElement('button');
+    button.textContent = day;
+    button.className = day === selectedDay ? 'day-btn active' : 'day-btn';
+    button.onclick = () => {
+      selectedDay = day;
+      // Update all buttons
+      document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      // Reload grid for the selected day
+      initBookingGrid(day);
+    };
+    daySelector.appendChild(button);
+  });
+}
+
 // Start the whole process
-initBookingGrid();
+initDaySelector();
+initBookingGrid(selectedDay);
