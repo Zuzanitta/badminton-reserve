@@ -77,12 +77,12 @@ app.get('/', (req: Request, res: Response) => {
 // Mapping of day names to Google Sheet gid (sheet ID)
 const dayMapping: { [key: string]: string } = {
   'Monday': '0',
-  'Tuesday': '1',
-  'Wednesday': '2',
-  'Thursday': '3',
-  'Friday': '4',
-  'Saturday': '5',
-  'Sunday': '6',
+  'Tuesday': '1913556288',
+  'Wednesday': '1722085273',
+  'Thursday': '87752868',
+  'Friday': '128713713',
+  'Saturday': '602841521',
+  'Sunday': '862076829',
 };
 
 const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRV8M-vYaXiga7SHxmV1QLQHx03lRh1uoIwkIVsPMNPR-sa7appOB70e-1FtP4IBU26oEtveKqG1_3/pub";
