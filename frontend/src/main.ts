@@ -14,6 +14,10 @@ async function initBookingGrid(day: string = 'Monday') {
 
   if (!courtsContainer || !labelsContainer) return;
 
+  // CLEAR BOTH CONTAINERS FIRST
+  courtsContainer.innerHTML = '';
+  labelsContainer.innerHTML = '';
+
   // 1. Fetch data from your backend with the selected day
   try {
     const response = await fetch(`https://badminton-reserve-cyan.vercel.app/api/courts?day=${day}`);
@@ -26,8 +30,7 @@ async function initBookingGrid(day: string = 'Monday') {
       labelsContainer.innerHTML += `<div class="time-label">${hour}:00</div>`;
     }
 
-    // 3. Clear and Render Court Headers (Pista 1, Pista 2...)
-    courtsContainer.innerHTML = '';
+    // 3. Render Court Headers (Pista 1, Pista 2...)
     courts.slice(0, 3).forEach(court => { // Limit to 3 courts as requested
       courtsContainer.innerHTML += `<div class="cell header-cell">${court.name}</div>`;
     });
