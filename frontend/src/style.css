@@ -297,7 +297,23 @@ code {
 
 /* frontend/src/style.css */
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; padding: 20px; }
-h1 { text-align: center; color: #1e293b; }
+
+/* Header styling */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.header-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+h1 { text-align: center; color: #1e293b; margin: 0; }
 
 /* Day Selector Container */
 .day-selector-container {
