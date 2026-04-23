@@ -138,26 +138,21 @@ function initDaySelector() {
   const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust to get Monday
   const monday = new Date(today.setDate(diff));
 
-  // Show next week's dates (since current day bookings end at midnight)
-  monday.setDate(monday.getDate() + 7); // Always show next week
-
   DAYS.forEach((day, index) => {
     const button = document.createElement('button');
-    
+
     // Calculate the date for this day
     const dayDate = new Date(monday);
     dayDate.setDate(dayDate.getDate() + index);
-    
-    // Format date (e.g., "Monday, April 23")
-    const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
-    const dateStr = dayDate.toLocaleDateString('en-US', options);
-    
-    // Set button text with day name and date
-    button.textContent = `${day}\n${dateStr}`;
-    button.className = day === selectedDay ? 'day-btn active' : 'day-btn';
-    button.onclick = () => {
-      selectedDay = day;
-      // Update all buttons
+
+    // Check if this day has already passed this week
+    const now = new Date();
+    const isDayPassed = dayDate < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // If the day has passed, show next week's date
+    if (isDayPassed) {
+      dayDate.setDate(dayDate.getDate() + 7);
+    }
       document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
       // Reload grid for the selected day
