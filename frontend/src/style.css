@@ -692,33 +692,41 @@ h1 { text-align: center; color: #1e293b; margin: 0; }
 
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
-/* Mobile optimization: stack columns if screen is too small */
-@media (max-width: 600px) {
-    .booking-container { 
-      flex-direction: column; 
-      gap: 15px;
-      padding: 0 10px;
-    }
-    .court-grid { 
-      grid-template-columns: 1fr; /* 1 column on mobile */ 
-      grid-template-rows: auto;
+/* Mobile optimization: keep 4 columns but make more compact */
+@media (max-width: 768px) {
+    .booking-container {
       gap: 6px;
+      padding: 0 8px;
+    }
+    .court-grid {
+      gap: 4px;
     }
     .time-labels {
-      display: none; /* Hide time labels on very small screens */
+      font-size: 11px;
+      padding: 0 2px;
+    }
+    .cell {
+      font-size: 11px;
+      padding: 4px;
+      min-height: 45px;
     }
 }
 
 @media (max-width: 480px) {
   .booking-container {
-    padding: 0 5px;
+    gap: 4px;
+    padding: 0 4px;
   }
   .court-grid {
-    gap: 4px;
+    gap: 3px;
+  }
+  .time-labels {
+    font-size: 10px;
+    padding: 0 1px;
   }
   .cell {
-    min-height: 50px;
-    font-size: 12px;
-    padding: 8px;
+    font-size: 10px;
+    padding: 3px;
+    min-height: 40px;
   }
 }
