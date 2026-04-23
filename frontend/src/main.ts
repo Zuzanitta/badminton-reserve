@@ -172,11 +172,14 @@ function initDaySelector() {
     } else {
       console.log(`${day}: final=${dayDate.toDateString()} (this week)`);
     }
+
+    button.onclick = () => {
       document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
       // Reload grid for the selected day
       initBookingGrid(day);
     };
+
     daySelector.appendChild(button);
   });
 }
