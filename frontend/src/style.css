@@ -646,7 +646,7 @@ h1 { text-align: center; color: #1e293b; margin: 0; }
 
 /* 1. Time Labels (left column) */
 .time-labels { display: grid; grid-template-rows: 50px repeat(13, 60px); /* Header + 13 hours - match court grid */ gap: 8px; font-weight: bold; color: #64748b; text-align: right; padding-right: 10px; }
-.time-label { display: flex; align-items: center; justify-content: flex-end; height: 60px; /* Matching cell height */ }
+.time-label { display: flex; align-items: center; justify-content: flex-end; /* Remove fixed height - let grid control it */ }
 
 /* 2. Court Grid (The 3 columns) */
 .court-grid {
@@ -703,6 +703,7 @@ h1 { text-align: center; color: #1e293b; margin: 0; }
       grid-template-rows: 50px repeat(13, 45px); /* Match cell min-height */
     }
     .time-labels {
+      gap: 4px; /* Match court-grid gap */
       font-size: 11px;
       padding: 0 2px;
       grid-template-rows: 50px repeat(13, 45px); /* Match court grid */
@@ -724,6 +725,7 @@ h1 { text-align: center; color: #1e293b; margin: 0; }
     grid-template-rows: 50px repeat(13, 40px); /* Match cell min-height */
   }
   .time-labels {
+    gap: 3px; /* Match court-grid gap */
     font-size: 10px;
     padding: 0 1px;
     grid-template-rows: 50px repeat(13, 40px); /* Match court grid */
