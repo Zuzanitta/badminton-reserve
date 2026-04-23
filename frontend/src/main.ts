@@ -145,6 +145,8 @@ function initDaySelector() {
     const dayDate = new Date(monday);
     dayDate.setDate(dayDate.getDate() + index);
 
+    console.log(`${day}: original=${dayDate.toDateString()}`);
+
     // Check if this day has already passed this week
     // If the day's index is less than or equal to today's day index, it has passed
     const now = new Date();
@@ -154,9 +156,14 @@ function initDaySelector() {
     const dayIndex = index + 1; // Monday = 1, Tuesday = 2, ..., Sunday = 7
     const isDayPassed = dayIndex <= currentDayIndex;
 
+    console.log(`${day}: index=${index}, dayIndex=${dayIndex}, currentDayIndex=${currentDayIndex}, isPassed=${isDayPassed}`);
+
     // If the day has passed, show next week's date
     if (isDayPassed) {
       dayDate.setDate(dayDate.getDate() + 7);
+      console.log(`${day}: final=${dayDate.toDateString()} (next week)`);
+    } else {
+      console.log(`${day}: final=${dayDate.toDateString()} (this week)`);
     }
       document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
