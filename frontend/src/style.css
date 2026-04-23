@@ -301,21 +301,20 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 /* Header styling */
 .header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   gap: 15px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
 }
 
 .header h1 {
-  flex: 1;
-  min-width: 250px;
+  text-align: center;
+  margin: 0;
 }
 
 .header-img {
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
 }
 
