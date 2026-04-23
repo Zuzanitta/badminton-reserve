@@ -146,8 +146,13 @@ function initDaySelector() {
     dayDate.setDate(dayDate.getDate() + index);
 
     // Check if this day has already passed this week
+    // If the day's index is less than today's day index, it has passed
     const now = new Date();
-    const isDayPassed = dayDate < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const currentDayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    // Convert Sunday (0) to 7 for easier comparison
+    const currentDayIndex = currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+    const dayIndex = index + 1; // Monday = 1, Tuesday = 2, ..., Sunday = 7
+    const isDayPassed = dayIndex < currentDayIndex;
 
     // If the day has passed, show next week's date
     if (isDayPassed) {
