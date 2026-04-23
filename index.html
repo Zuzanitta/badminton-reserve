@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reservas Bádminton</title>
+    <title>Reserva Pistas de Bádminton</title>
   <script type="module" crossorigin src="/badminton-reserve/assets/index-CCRKNsAL.js"></script>
   <link rel="stylesheet" crossorigin href="/badminton-reserve/assets/index-bVpFra6e.css">
 </head>
@@ -11,7 +11,8 @@
     <div id="app">
         <div class="header">
             <img src="./fengxing.png" alt="Badminton Logo" class="header-img">
-            <h1>🏸 Reservas Bádminton</h1>
+            <h1>Reserva Pistas de Bádminton</h1>
+            <button class="contact-btn" id="contact-btn">📞 Contacto</button>
         </div>
         <div class="day-selector-container">
           <p>Selecciona un día:</p>
@@ -21,6 +22,36 @@
             <div class="time-labels" id="time-labels"></div>
             
             <div class="court-grid" id="court-grid"></div>
+        </div>
+        
+        <!-- Contact Modal -->
+        <div id="contact-modal" class="contact-modal">
+            <div class="contact-modal-content">
+                <button class="close-btn" id="close-contact-btn">&times;</button>
+                <h2>📞 Información de Contacto</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>WhatsApp:</strong>
+                        <p id="contact-phone">+34 671414376</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email:</strong>
+                        <p id="contact-email">thesmashersclub@gmail.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Wechat:</strong>
+                        <p id="contact-wechat">339094161</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Instagram:</strong>
+                        <p id="contact-ig">badmintonthesmashers</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Dirección:</strong>
+                        <p id="contact-address">Calle San Jaime 7, Villa de Vallecas, 28031 Madrid</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
