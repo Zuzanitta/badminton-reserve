@@ -1,6 +1,8 @@
 import './style.css'; // Import our CSS
 import type { CourtData } from './types'; // (You need to create this file)
 
+console.log('main.ts loaded');
+
 // Define the operating hours (10:00 to 22:00)
 const START_HOUR = 10;
 const END_HOUR = 22;
@@ -129,8 +131,13 @@ function showBookingNotification(courtId: number, time: string) {
 
 // Initialize day selector
 function initDaySelector() {
+  console.log('initDaySelector called');
   const daySelector = document.querySelector<HTMLDivElement>('#day-selector');
-  if (!daySelector) return;
+  if (!daySelector) {
+    console.log('daySelector not found');
+    return;
+  }
+  console.log('daySelector found, proceeding...');
 
   // Calculate dates for the current week (Monday to Sunday)
   const today = new Date();
