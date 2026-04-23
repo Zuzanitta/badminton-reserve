@@ -75,12 +75,57 @@ function getStatusText(status: string): string {
 // (Optional) Simple click handler to test interaction
 (window as any).handleSlotClick = (courtId: number, time: string, status: string) => {
   if (status === 'available') {
-    alert(`Has seleccionado Pista ${courtId} a las ${time}. ¡A por ellos!`);
-    // Here you would navigate to the checkout page or call your lock API.
+    // Show a custom notification with a link to contact info
+    showBookingNotification(courtId, time);
   } else {
     alert(`Esta pista no está disponible.`);
   }
 };
+
+// Show a booking notification with a link to contact info
+function showBookingNotification(courtId: number, time: string) {
+  // Create a notification element
+  const notification = document.createElement('div');
+  notification.className = 'booking-notification';
+  notification.innerHTML = `
+    <div class="notification-content">
+      <p>Has seleccionado Pista ${courtId} a las ${time}. <a href="#" class="contact-link">Contacta aquí</a> para ver la información de contacto</p>
+      <button class="notification-close">&times;</button>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Handle contact link click
+  const contactLink = notification.querySelector('.contact-link');
+  if (contactLink) {
+    contactLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Close notification
+      notification.remove();
+      // Open contact modal
+      const contactModal = document.getElementById('contact-modal');
+      if (contactModal) {
+        contactModal.classList.add('show');
+      }
+    });
+  }
+  
+  // Handle close button
+  const closeBtn = notification.querySelector('.notification-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      notification.remove();
+    });
+  }
+  
+  // Auto-remove notification after 10 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove();
+    }
+  }, 10000);
+}
 
 // Initialize day selector
 function initDaySelector() {
@@ -122,3 +167,32 @@ function initDaySelector() {
 // Start the whole process
 initDaySelector();
 initBookingGrid(selectedDay);
+
+// Initialize contact modal
+function initContactModal() {
+  const contactBtn = document.getElementById('contact-btn');
+  const contactModal = document.getElementById('contact-modal');
+  const closeBtn = document.getElementById('close-contact-btn');
+
+  if (!contactBtn || !contactModal || !closeBtn) return;
+
+  // Open modal
+  contactBtn.addEventListener('click', () => {
+    contactModal.classList.add('show');
+  });
+
+  // Close modal
+  closeBtn.addEventListener('click', () => {
+    contactModal.classList.remove('show');
+  });
+
+  // Close modal when clicking outside
+  contactModal.addEventListener('click', (e) => {
+    if (e.target === contactModal) {
+      contactModal.classList.remove('show');
+    }
+  });
+}
+
+// Initialize contact modal after page loads
+initContactModal();
