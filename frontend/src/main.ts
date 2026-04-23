@@ -87,9 +87,25 @@ function initDaySelector() {
   const daySelector = document.querySelector<HTMLDivElement>('#day-selector');
   if (!daySelector) return;
 
-  DAYS.forEach(day => {
+  // Calculate dates for the current week (Monday to Sunday)
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust to get Monday
+  const monday = new Date(today.setDate(diff));
+
+  DAYS.forEach((day, index) => {
     const button = document.createElement('button');
-    button.textContent = day;
+    
+    // Calculate the date for this day
+    const dayDate = new Date(monday);
+    dayDate.setDate(dayDate.getDate() + index);
+    
+    // Format date (e.g., "Monday, April 23")
+    const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
+    const dateStr = dayDate.toLocaleDateString('en-US', options);
+    
+    // Set button text with day name and date
+    button.textContent = `${day}\n${dateStr}`;
     button.className = day === selectedDay ? 'day-btn active' : 'day-btn';
     button.onclick = () => {
       selectedDay = day;
