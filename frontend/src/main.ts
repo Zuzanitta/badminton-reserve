@@ -138,6 +138,9 @@ function initDaySelector() {
   const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust to get Monday
   const monday = new Date(today.setDate(diff));
 
+  // Show next week's dates (since current day bookings end at midnight)
+  monday.setDate(monday.getDate() + 7); // Always show next week
+
   DAYS.forEach((day, index) => {
     const button = document.createElement('button');
     
