@@ -145,45 +145,48 @@ function initDaySelector() {
   const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust to get Monday
   const monday = new Date(today.setDate(diff));
 
+  // Find the current weekday to keep the current day in this week
+  const currentDayOfWeek = new Date().getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  const currentDayIndex = currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+
   DAYS.forEach((day, index) => {
     const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'day-btn';
 
     // Calculate the date for this day
     const dayDate = new Date(monday);
     dayDate.setDate(dayDate.getDate() + index);
 
-    console.log(`${day}: original=${dayDate.toDateString()}`);
-
-    // Check if this day has already passed this week
-    // If the day's index is less than or equal to today's day index, it has passed
-    const now = new Date();
-    const currentDayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-    // Convert Sunday (0) to 7 for easier comparison
-    const currentDayIndex = currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
     const dayIndex = index + 1; // Monday = 1, Tuesday = 2, ..., Sunday = 7
-    const isDayPassed = dayIndex <= currentDayIndex;
+    const isDayPassed = dayIndex < currentDayIndex; // Only days before today roll to next week
 
-    console.log(`${day}: index=${index}, dayIndex=${dayIndex}, currentDayIndex=${currentDayIndex}, isPassed=${isDayPassed}`);
-
-    // If the day has passed, show next week's date
     if (isDayPassed) {
       dayDate.setDate(dayDate.getDate() + 7);
-      console.log(`${day}: final=${dayDate.toDateString()} (next week)`);
-    } else {
-      console.log(`${day}: final=${dayDate.toDateString()} (this week)`);
     }
 
-    button.onclick = () => {
+    button.innerText = `${day}\n${formatDate(dayDate)}`;
+
+    if (day === selectedDay) {
+      button.classList.add('active');
+    }
+
+    button.addEventListener('click', () => {
       document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
-      // Reload grid for the selected day
+      selectedDay = day;
       initBookingGrid(day);
-    };
+    });
 
     daySelector.appendChild(button);
   });
 }
-
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: 'short'
+  });
+}
 // Start the whole process
 initDaySelector();
 initBookingGrid(selectedDay);
